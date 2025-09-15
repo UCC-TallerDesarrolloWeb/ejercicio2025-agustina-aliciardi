@@ -3,6 +3,7 @@
   <head>
     <title>Catálogo de Productos</title>
     <link rel="stylesheet" href="store.css" type="text/css" />
+    <script type="text/javascript" src="tienda.js"></script>
   </head>
   <body class="grid-container">
     <header class="item1">Católogo de Productos</header>
@@ -57,28 +58,35 @@
       </form>
     </aside>
     <main class="item4">
-      <div>
-        <img src="/images/cabezal-cerrado.webp" alt="Cabezal Cerrado" />
+      <dialog id="detalle">
+        <h2>Detalle del Producto</h2>
         <h3>Cabezal Cerrado</h3>
+        <p>Este producto viene del talle 1 al 3.</p>
+        <button type="button" onclick="cerrarModal()">Cerrar</button>
+      </dialog>
+      <div>
+        <img src="images/cabezal-cerrado.webp" alt="Cabezal Cerrado" />
+        <h3>Cabezal Cerrado</h3>
+        <button type="button" onclick="mostrarDetalle()">Ver Detalle</button>
       </div>
       <div>
-        <img src="/images/escudo-potencia.webp" alt="Escudo de Potencia" />
+        <img src="images/escudo-potencia.webp" alt="Escudo de Potencia" />
         <h3>Escudo de Potencia</h3>
       </div>
       <div>
-        <img src="/images/foco-con-dedos.webp" alt="Foco con Dedos" />
+        <img src="images/foco-con-dedos.webp" alt="Foco con Dedos" />
         <h3>Foco con Dedos</h3>
       </div>
       <div>
-        <img src="/images/protectores-manos.webp" alt="Protectores de Mano" />
+        <img src="images/protectores-manos.webp" alt="Protectores de Mano" />
         <h3>Protectores de Mano</h3>
       </div>
       <div>
-        <img src="/images/dobok.webp" alt="Dobok" />
+        <img src="images/dobok.webp" alt="Dobok" />
         <h3>Dobok</h3>
       </div>
       <div>
-        <img src="/images/protectores-pie.webp" alt="Protectores de Pie" />
+        <img src="images/protectores-pie.webp" alt="Protectores de Pie" />
         <h3>Protectores de Pie</h3>
       </div>
     </main>
