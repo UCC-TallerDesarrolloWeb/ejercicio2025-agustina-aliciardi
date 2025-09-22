@@ -15,7 +15,7 @@ const productos = [
     categoria: "Dobok",
     marca: "Daedo",
     talle: ["1", "2", "3", "4", "5", "6", "7", "8"],
-    precio: 115000,
+    precio: 115000.345,
     web: "https://www.daedo.com/products/taitf-10813",
     imagen: "dobok.webp",
   },
@@ -25,7 +25,7 @@ const productos = [
     categoria: "Entrenamiento",
     marca: "Gran Marc",
     talle: ["s/talle"],
-    precio: 51700,
+    precio: 51700.23,
     web: "https://www.granmarctiendaonline.com.ar/productos/escudo-de-potencia-grande/",
     imagen: "escudo-potencia.webp",
   },
@@ -46,7 +46,7 @@ const productos = [
     categoria: "Protectores",
     marca: "Daedo",
     talle: ["s/talle"],
-    precio: 35000,
+    precio: 35000.5,
     web: "https://www.daedo.com/products/pritf-2020",
     imagen: "protectores-manos.webp",
   },
@@ -80,7 +80,7 @@ let mostrarCatalogo = (prod = productos) => {
     contenido += `<div>
         <img src="images/${prod.imagen}" alt="${prod.nombre}" />
         <h3>${prod.nombre}</h3>
-        <p>${prod.precio}</p>
+        <p>${formatPrice(prod.precio)}</p>
         <button type="button" onclick="mostrarDetalle(${id})">Ver Detalle</button>
         <button type="button" onclick="agregarAlCarrito(${id})">Agregar al Carrito</button>
       </div>`;
@@ -101,6 +101,7 @@ let agregarAlCarrito = (id) => {
 
   listadoProductos.push(id);
   localStorage.setItem("carrito", JSON.stringify(listadoProductos));
+  contarProductos();
 };
 
 let mostrarCarrito = () => {
@@ -111,7 +112,7 @@ let mostrarCarrito = () => {
     carrito.forEach((num, id) => {
       contenido += `<div>
         <h3>${productos[num].nombre}</h3>
-        <p>${productos[num].precio}</p>
+        <p>${formatPrice(productos[num].precio)}</p>
         <button type="button" onclick="eliminarProducto(${id})">Eliminar Producto</button>
       </div>`;
     });
@@ -180,4 +181,20 @@ let filtrarProducto = () => {
   }
 
   mostrarCatalogo(newLista);
+};
+
+let formatPrice = (price) => {
+  const numberFormat = new Intl.NumberFormat("es-AR", {
+    currency: "ARS",
+    style: "currency",
+  });
+  return numberFormat.format(price);
+};
+
+let contarProductos = () => {
+  const getCart = JSON.parse(localStorage.getItem("carrito"));
+
+  if (getCart.length > 0) {
+    document.getElementById("cant-prod").innerText = getCart.length;
+  }
 };
