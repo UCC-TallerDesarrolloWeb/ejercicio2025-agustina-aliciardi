@@ -73,13 +73,14 @@ let cerrarModal = () => {
   document.getElementById("detalle").style.display = "none";
 };
 
-let mostrarCatalogo = () => {
+let mostrarCatalogo = (prod = productos) => {
   let contenido = "";
 
-  productos.forEach((prod, id) => {
+  prod.forEach((prod, id) => {
     contenido += `<div>
         <img src="images/${prod.imagen}" alt="${prod.nombre}" />
         <h3>${prod.nombre}</h3>
+        <p>${prod.precio}</p>
         <button type="button" onclick="mostrarDetalle(${id})">Ver Detalle</button>
         <button type="button" onclick="agregarAlCarrito(${id})">Agregar al Carrito</button>
       </div>`;
@@ -129,6 +130,54 @@ let eliminarProducto = (id) => {
   const carrito = JSON.parse(localStorage.getItem("carrito"));
 
   carrito.splice(id, 1);
-  localStorage.setItem("carrito", JSON.stringify(carrito));
+
+  if (carrito.length > 0) {
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+  } else {
+    localStorage.removeItem("carrito");
+  }
+
   window.location.reload();
+};
+
+let filtrarProducto = () => {
+  //Mejorar y Optimizar esta función (4 funciones)
+  let searchWord = document.getElementById("search").value;
+  let min = document.getElementById("price-min").value;
+  let max = document.getElementById("price-max").value;
+  let prot = document.getElementById("protectores").checked;
+  let entr = document.getElementById("entrenamiento").checked;
+  let dob = document.getElementById("dobok").checked;
+  let marca = document.getElementById("marca").value;
+
+  let newLista = productos;
+
+  if (searchWord) {
+    newLista = newLista.filter(
+      (prod) =>
+        prod.nombre.toLowerCase().includes(searchWord.toLowerCase()) ||
+        prod.description.toLowerCase().includes(searchWord.toLowerCase())
+    );
+  }
+  if (min) {
+    newLista = newLista.filter((prod) => prod.precio >= min);
+  }
+  if (max) {
+    newLista = newLista.filter((prod) => prod.precio <= max);
+  }
+
+  let category = [];
+  prot ? category.push("Protectores") : "";
+  entr ? category.push("Entrenamiento") : "";
+  dob ? category.push("Dobok") : "";
+
+  if (category.length > 0) {
+    newLista = newLista.filter((prod) => category.includes(prod.categoria));
+  }
+
+  if (marca != "Todas") {
+    newLista = newLista.filter((prod) => prod.marca == marca);
+  }
+
+  mostrarCatalogo(newLista);
 };
