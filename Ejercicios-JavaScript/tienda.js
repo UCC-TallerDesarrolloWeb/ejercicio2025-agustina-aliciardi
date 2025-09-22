@@ -215,3 +215,40 @@ let contarProductos = () => {
     document.getElementById("cant-prod").innerText = JSON.parse(getCart).length;
   }
 };
+
+let orderCatalog = (order) => {
+  //Optimizar la función
+  let newProducts;
+
+  switch (order) {
+    case "menor":
+      newProducts = productos.sort((a, b) => a.precio - b.precio);
+      break;
+    case "mayor":
+      newProducts = productos.sort((a, b) => b.precio - a.precio);
+      break;
+    case "a-z":
+      newProducts = productos.sort((a, b) => {
+        if (a.nombre.toLowerCase() < b.nombre.toLowerCase()) {
+          return -1;
+        } else {
+          return 1;
+        }
+      });
+      break;
+    case "z-a":
+      newProducts = productos.sort((a, b) => {
+        if (a.nombre.toLowerCase() > b.nombre.toLowerCase()) {
+          return -1;
+        } else {
+          return 1;
+        }
+      });
+      break;
+    default:
+      newProducts = productos.sort((a, b) => a.precio - b.precio);
+      break;
+  }
+
+  mostrarCatalogo(newProducts);
+};
