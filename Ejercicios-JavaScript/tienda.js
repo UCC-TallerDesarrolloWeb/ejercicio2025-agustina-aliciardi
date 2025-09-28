@@ -62,6 +62,12 @@ const productos = [
   },
 ];
 
+/**
+ * Descripción de que hace la función
+ * @method mostrarDetalle
+ * @param {string} ParámetroA - Explicación de que valor almacena ParámetroA
+ * @return Valor que retorna
+ */
 let mostrarDetalle = (id) => {
   document.getElementById("detalle").style.display = "block";
   document.getElementById("titulo-prod").innerText = productos[id].nombre;
@@ -69,10 +75,22 @@ let mostrarDetalle = (id) => {
   document.getElementById("precio-prod").innerText = productos[id].precio;
 };
 
+/**
+ * Descripción de que hace la función
+ * @method mostrarDetalle
+ * @param {string} ParámetroA - Explicación de que valor almacena ParámetroA
+ * @return Valor que retorna
+ */
 let cerrarModal = () => {
   document.getElementById("detalle").style.display = "none";
 };
 
+/**
+ * Descripción de que hace la función
+ * @method mostrarDetalle
+ * @param {string} ParámetroA - Explicación de que valor almacena ParámetroA
+ * @return Valor que retorna
+ */
 let mostrarCatalogo = (prod = productos) => {
   let contenido = "";
 
@@ -89,6 +107,12 @@ let mostrarCatalogo = (prod = productos) => {
   document.getElementById("catalogo").innerHTML = contenido;
 };
 
+/**
+ * Descripción de que hace la función
+ * @method agregarAlCarrito
+ * @param {string} ParámetroA - Explicación de que valor almacena ParámetroA
+ * @return Valor que retorna
+ */
 let agregarAlCarrito = (id) => {
   let listadoProductos;
   const listaInicial = JSON.parse(localStorage.getItem("carrito"));
@@ -104,6 +128,12 @@ let agregarAlCarrito = (id) => {
   contarProductos();
 };
 
+/**
+ * Descripción de que hace la función
+ * @method agregarAlCarrito
+ * @param {string} ParámetroA - Explicación de que valor almacena ParámetroA
+ * @return Valor que retorna
+ */
 let mostrarCarrito = () => {
   let contenido = "";
   const carrito = JSON.parse(localStorage.getItem("carrito"));
@@ -139,11 +169,23 @@ let mostrarCarrito = () => {
   }
 };
 
+/**
+ * Descripción de que hace la función
+ * @method agregarAlCarrito
+ * @param {string} ParámetroA - Explicación de que valor almacena ParámetroA
+ * @return Valor que retorna
+ */
 let vaciarCarrito = () => {
   localStorage.removeItem("carrito");
   window.location.reload();
 };
 
+/**
+ * Descripción de que hace la función
+ * @method agregarAlCarrito
+ * @param {string} ParámetroA - Explicación de que valor almacena ParámetroA
+ * @return Valor que retorna
+ */
 let eliminarProducto = (id) => {
   const carrito = JSON.parse(localStorage.getItem("carrito"));
 
@@ -158,6 +200,12 @@ let eliminarProducto = (id) => {
   window.location.reload();
 };
 
+/**
+ * Descripción de que hace la función
+ * @method agregarAlCarrito
+ * @param {string} ParámetroA - Explicación de que valor almacena ParámetroA
+ * @return Valor que retorna
+ */
 let filtrarProducto = () => {
   //Mejorar y Optimizar esta función (4 funciones)
   let searchWord = document.getElementById("search").value;
@@ -200,6 +248,12 @@ let filtrarProducto = () => {
   mostrarCatalogo(newLista);
 };
 
+/**
+ * Descripción de que hace la función
+ * @method agregarAlCarrito
+ * @param {string} ParámetroA - Explicación de que valor almacena ParámetroA
+ * @return Valor que retorna
+ */
 let formatPrice = (price) => {
   const numberFormat = new Intl.NumberFormat("es-AR", {
     currency: "ARS",
@@ -208,6 +262,12 @@ let formatPrice = (price) => {
   return numberFormat.format(price);
 };
 
+/**
+ * Descripción de que hace la función
+ * @method agregarAlCarrito
+ * @param {string} ParámetroA - Explicación de que valor almacena ParámetroA
+ * @return Valor que retorna
+ */
 let contarProductos = () => {
   const getCart = localStorage.getItem("carrito");
 
@@ -216,6 +276,12 @@ let contarProductos = () => {
   }
 };
 
+/**
+ * Descripción de que hace la función
+ * @method agregarAlCarrito
+ * @param {string} ParámetroA - Explicación de que valor almacena ParámetroA
+ * @return Valor que retorna
+ */
 let orderCatalog = (order) => {
   //Optimizar la función
   let newProducts;
