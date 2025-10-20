@@ -1,11 +1,29 @@
 import '@styles/Activities.scss';
-import { activities } from '../data/activities';
+//import { activities } from '../data/activities';
 import Card from '../components/Card';
+import { useEffect, useState } from 'react';
 
 const Activities = () => {
+    const [activities, setActivities] = useState([]);
     const diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
 
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+    const BASE_URL = "http://localhost:4000/activities";
+
+    const fetchActivities = async () => {
+        try{
+            const response = await fetch(BASE_URL);
+            const data = await response.json();
+            setActivities(data);
+        }catch(error){
+            console.error(`Errror al retornar actividades ${error}`)
+        }   
+    }
+
+    useEffect(() => {
+        fetchActivities();
+    }, []);
 
     const handleInscribir = (nombreActividad) => {
         alert(`Inscripto en ${nombreActividad}`)
