@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import PokeCard from "../components/PokeCard";
 
 const Poke = () => {
-    const [pokemonData, setPokemonData] = useState();
+    const [pokemonData, setPokemonData] = useState([]);
+    
 
     const BASE_URL="https://pokeapi.co/api/v2/pokemon/";
 
@@ -9,15 +11,17 @@ const Poke = () => {
         try{
             const response = await fetch(`${BASE_URL}${id}`);
             const data = await response.json();
-            setPokemonData(data);
-            console.log(data);
+            setPokemonData((prev) => [...prev, data]);
         }catch(error){
             console.error(`Error en el fetch del pokemon: ${id}-${error}`)
         }
     }
 
     useEffect(() => {
-        fetchPokemons(1);
+        for(let i=1;i<21;i++){
+            fetchPokemons(i);
+        }
+        
     }, []);
 
     if(!pokemonData){
@@ -26,12 +30,10 @@ const Poke = () => {
 
     return (
         <>
-            <div>
-                <img src={pokemonData.sprites.front_default} alt={pokemonData.name} />
-                <h2>{pokemonData.name}</h2>
-                <p>ID: {pokemonData.id}</p>
-                <p>Peso: {pokemonData.weight}</p>
-            </div>
+            { pokemonData.map((pokemon, id) => (
+                <PokeCard key={id} pokemon={pokemon} />
+            ))}
+            
         </>
     )
 
